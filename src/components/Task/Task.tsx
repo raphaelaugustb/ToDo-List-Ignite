@@ -1,21 +1,24 @@
 import styles from "./Task.module.css"
-import { Trash, Check } from "@phosphor-icons/react"
+import { Trash, Check, Divide } from "@phosphor-icons/react"
 interface taskProps {
   taskDescription: string
   id: number
   removeTask: (id: number) => void
   toogleCheckTask: (id: number) => void
+  info: ITask
 }
 export interface ITask {
   id: number
   description: string
   isChecked: boolean
 }
+
 export function Task({
   taskDescription,
   id,
   removeTask,
   toogleCheckTask,
+  info,
 }: taskProps) {
   function handleRemoveTask() {
     removeTask(id)
@@ -23,14 +26,25 @@ export function Task({
   function handleToogleCheckTask() {
     toogleCheckTask(id)
   }
+
   return (
     <div className={styles.taskContainer}>
       <div className={styles.descriptionContainer}>
         <button
-          className={styles.checkButton}
+          className={
+            info.isChecked ? styles.checkedButton : styles.uncheckedButton
+          }
           onClick={handleToogleCheckTask}
-        ></button>
-        <div className={styles.descriptionParagraphContainer}>
+        >
+          {info.isChecked ? <Check size={16} /> : <div></div>}
+        </button>
+        <div
+          className={
+            info.isChecked
+              ? styles.descriptionParagraphContainerChecked
+              : styles.descriptionParagraphContainerUnchecked
+          }
+        >
           <p>{taskDescription}</p>
         </div>
       </div>

@@ -10,15 +10,14 @@ function App() {
   const [tasks, setTasks] = useState<ITask[]>([])
   const [description, setDescription] = useState("")
   let [checkedTasks, setCheckedTasks] = useState(0)
-  let [uncheckedTasks, setUnchekedTask] = useState(0)
   function handleMonitoringTaskCounting() {
-    tasks.map((item) => {
-      if (item.isChecked) {
-        setCheckedTasks((counter) => counter + 1)
-      } else {
-        setUnchekedTask((counter) => counter + 1)
+    const counter = tasks.reduce((prevValue, currenteTask) => {
+      if (currenteTask.isChecked) {
+        return prevValue + 1
       }
-    })
+      return prevValue
+    }, 0)
+    setCheckedTasks(counter)
   }
   function handleToogleCheckTask(id: number) {
     const updatedTasks = tasks.map((task) => {
@@ -46,6 +45,7 @@ function App() {
       return
     }
     setTasks(tasksWithoutRemovedOne)
+    handleMonitoringTaskCounting()
   }
 
   function handleGetTaskDescription(event: ChangeEvent<HTMLTextAreaElement>) {
@@ -62,6 +62,7 @@ function App() {
             value={description}
             placeholder="Adicione uma nova tarefa"
             onChange={handleGetTaskDescription}
+            required={true}
           ></textarea>
           <button type="submit">
             Criar
@@ -72,7 +73,7 @@ function App() {
       <div className={styles.taskContainer}>
         <header>
           <strong>
-            Tarefas <span>{uncheckedTasks}</span>
+            Tarefas <span>{tasks.length}</span>
           </strong>
 
           <strong>
@@ -81,11 +82,12 @@ function App() {
         </header>
         <div>
           {tasks.length > 0 ? (
-            tasks.map((tasks) => (
+            tasks.map((task) => (
               <Task
-                key={tasks.id}
-                taskDescription={tasks.description}
-                id={tasks.id}
+                info={task}
+                key={task.id}
+                taskDescription={task.description}
+                id={task.id}
                 removeTask={handleRemoveTask}
                 toogleCheckTask={handleToogleCheckTask}
               ></Task>
