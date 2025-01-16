@@ -30,7 +30,9 @@ export function Task({
           className={styles.checkButton}
           onClick={handleToogleCheckTask}
         ></button>
-        <p>{taskDescription}</p>
+        <div className={styles.descriptionParagraphContainer}>
+          <p>{taskDescription}</p>
+        </div>
       </div>
       <button className={styles.removeButton} onClick={handleRemoveTask}>
         <Trash size={20} />

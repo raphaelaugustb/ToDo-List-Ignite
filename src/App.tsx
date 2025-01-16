@@ -4,7 +4,8 @@ import { Header } from "./components/Header/Header"
 import { ITask, Task } from "./components/Task/Task"
 import { PlusCircle } from "@phosphor-icons/react"
 import { ChangeEvent, FormEvent, useState } from "react"
-//TODO: monitor check and unchecked tasks
+import { EmptyTask } from "./components/EmptyTask/EmptyTask"
+//TODO: monitor check and unchecked tasks and update css
 function App() {
   const [tasks, setTasks] = useState<ITask[]>([])
   const [description, setDescription] = useState("")
@@ -79,15 +80,19 @@ function App() {
           </strong>
         </header>
         <div>
-          {tasks.map((tasks) => (
-            <Task
-              key={tasks.id}
-              taskDescription={tasks.description}
-              id={tasks.id}
-              removeTask={handleRemoveTask}
-              toogleCheckTask={handleToogleCheckTask}
-            ></Task>
-          ))}
+          {tasks.length > 0 ? (
+            tasks.map((tasks) => (
+              <Task
+                key={tasks.id}
+                taskDescription={tasks.description}
+                id={tasks.id}
+                removeTask={handleRemoveTask}
+                toogleCheckTask={handleToogleCheckTask}
+              ></Task>
+            ))
+          ) : (
+            <EmptyTask />
+          )}
         </div>
       </div>
     </div>
