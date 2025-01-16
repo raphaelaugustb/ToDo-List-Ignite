@@ -1,18 +1,21 @@
 import styles from "./Task.module.css"
 import { Trash, Check } from "@phosphor-icons/react"
-import { FocusEvent } from "react"
 interface taskProps {
   taskDescription: string
 }
-
+export interface ITask {
+  id: number
+  description: string
+  isChecked: boolean
+}
 export function Task({ taskDescription }: taskProps) {
   return (
     <div className={styles.taskContainer}>
       <div className={styles.descriptionContainer}>
-        <button></button>
+        <button className={styles.checkButton}></button>
         <p>{taskDescription}</p>
       </div>
-      <button>
+      <button className={styles.removeButton}>
         <Trash size={20} />
       </button>
     </div>

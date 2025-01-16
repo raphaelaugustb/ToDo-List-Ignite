@@ -20,3 +20,49 @@
   font-size: 0.75rem;
   margin-left: 0.3rem;
 }
+
+.createAreaContainer {
+  width: 46rem;
+  margin: -2rem auto 0 auto;
+}
+
+.createAreaContainer textarea {
+  resize: none;
+  width: 39.875rem;
+  height: 3.375rem;
+  background-color: var(--gray-500);
+  border: none;
+  border-radius: 8px;
+  color: var(--gray-300);
+  padding-top: 1rem;
+  font-size: 1rem;
+  padding-left: 1rem;
+  outline: none;
+}
+
+.createAreaContainer textarea:focus {
+  color: var(--gray-100);
+  border: 1.5px solid var(--purple-dark);
+}
+.createAreaContainer form {
+  display: flex;
+  justify-content: space-between;
+}
+.createAreaContainer button {
+  background-color: var(--blue-dark);
+  color: var(--gray-100);
+  border: 0;
+  border-radius: 8px;
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 0.875rem;
+  transition: 1s;
+}
+.createAreaContainer button:hover {
+  background-color: var(--blue);
+}
+
+.createAreaContainer button svg {
+  margin-left: 4px;
+  margin-bottom: -4px;
+}
